@@ -1,150 +1,50 @@
-<!DOCTYPE html>
-<!-- saved from url=(0101)https://s3.amazonaws.com/mturk/samples/sagemaker/mturk_iris_annotate_and_classify/IrisAnnotation.html -->
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>HIT</title>
-    <script
-      type="text/javascript"
-      src="./HIT_files/externalHIT_v1.js.ダウンロード"
-    ></script>
-  </head>
-  <body>
-    <form
-      name="mturk_form"
-      method="post"
-      id="mturk_form"
-      action="https://www.mturk.com/mturk/externalSubmit"
-    >
-      <input
-        type="hidden"
-        value=""
-        name="assignmentId"
-        id="assignmentId"
-      /><!-- HIT template: WebsiteDataCollection-v3.0 --><!-- The following snippet enables the 'responsive' behavior on smaller screens -->
-      <!-- HIT template: Sentiment-v3.0 --><!-- The following snippet enables the 'responsive' behavior on smaller screens -->
-      <meta content="width=device-width,initial-scale=1" name="viewport" />
-      <section class="container" id="Sentiment">
-        <h1>Kakehi Survey</h1>
-        <p>Please answer a few questions about the weather in your area:</p>
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
-        <form id="weatherForm">
-          <label for="cityInput">City:</label>
-          <input type="text" id="cityInput" name="city" required /><br /><br />
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
 
-          <label for="weatherInput">Current Weather:</label>
-          <input
-            type="text"
-            id="weatherInput"
-            name="weather"
-            required
-          /><br /><br />
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
 
-          <label for="temperatureInput">Temperature (in Celsius):</label>
-          <input
-            type="number"
-            id="temperatureInput"
-            name="temperature"
-            required
-          /><br /><br />
+  <crowd-instructions link-text="View instructions" link-type="button">
+    <short-summary>
+      <p>Provide a brief instruction here</p>
+    </short-summary>
 
-          <button type="submit">Submit</button>
-        </form>
-      </section>
-      <!-- End Categorization Layout --><!-- Please note that Bootstrap CSS/JS and JQuery are 3rd party libraries that may update their url/code at any time. Amazon Mechanical Turk (MTurk) is including these libraries as a default option for you, but is not responsible for any changes to the external libraries --><!-- External CSS references -->
-      <link
-        crossorigin="anonymous"
-        href="./HIT_files/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        rel="stylesheet"
-      /><!-- Open internal style sheet -->
-      <style type="text/css">
-        #collapseTrigger {
-          color: #fff;
-          display: block;
-          text-decoration: none;
-        }
-        #submitButton {
-          white-space: normal;
-        }
-        #instructionBody table {
-          font-size: 14px;
-          margin-top: 10px;
-        }
-        #instructionBody table caption {
-          text-align: left;
-          padding: 0 0 5px 0;
-        }
-        #Inputs {
-          display: block;
-          margin-top: 10px;
-        }
-        .content {
-          margin-bottom: 15px;
-        }
-        .radio:first-of-type {
-          margin-top: -5px;
-        }
-      </style>
-      <!-- Close internal style sheet --><!-- External JS references -->
-      <script
-        src="./HIT_files/jquery-3.1.0.min.js.ダウンロード"
-        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="./HIT_files/bootstrap.min.js.ダウンロード"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"
-      ></script>
-      <!-- Open internal javascript -->
-      <script>
-        $(document).ready(function () {
-          // Instructions expand/collapse
-          var content = $("#instructionBody");
-          var trigger = $("#collapseTrigger");
-          content.hide();
-          $(".collapse-text").text("(Click to expand)");
-          trigger.click(function () {
-            content.toggle();
-            var isVisible = content.is(":visible");
-            if (isVisible) {
-              $(".collapse-text").text("(Click to collapse)");
-            } else {
-              $(".collapse-text").text("(Click to expand)");
-            }
-          });
-          // end expand/collapse
+    <detailed-instructions>
+      <h3>Provide more detailed instructions here</h3>
+      <p>Include additional information</p>
+    </detailed-instructions>
 
-          // highlight selected category
-          var inputs = $("#Inputs input:radio");
-          inputs.change(function () {
-            inputs.parent().removeClass("btn-success");
-            inputs.parent().addClass("btn-default");
-            if ($(this).is(":checked")) {
-              $(this).parent().removeClass("btn-default");
-              $(this).parent().addClass("btn-success");
-            } else {
-              $(this).parent().removeClass("btn-success");
-              $(this).parent().addClass("btn-default");
-            }
-          });
-          // end highlight
-        });
-      </script>
-      <!-- Close internal javascript -->
-      <p class="text-center">
-        <input
-          type="submit"
-          id="submitButton"
-          class="btn btn-primary"
-          value="Submit"
-        />
-      </p>
-    </form>
+    <positive-example>
+      <p>Provide an example of a good answer here</p>
+      <p>Explain why it's a good answer</p>
+    </positive-example>
 
-    <script language="Javascript">
-      turkSetAssignmentID();
-    </script>
-  </body>
-</html>
+    <negative-example>
+      <p>Provide an example of a bad answer here</p>
+      <p>Explain why it's a bad answer</p>
+    </negative-example>
+  </crowd-instructions>
+
+  <div>
+    <p>What is your favorite color for a bird?</p>
+    <crowd-input name="favoriteColor" placeholder="example: pink" required></crowd-input>
+  </div>
+
+  <div>
+    <p>Check this box if you like birds</p>
+    <crowd-checkbox name="likeBirds" checked="true" required></crowd-checkbox>
+  </div>
+
+  <div>
+    <p>On a scale of 1-10, how much do you like birds?</p>
+    <crowd-slider name="howMuch" min="1" max="10" step="1" pin="true" required></crowd-slider>
+  </div>
+
+  <div>
+    <p>Write a short essay describing your favorite bird</p>
+    <crowd-text-area name="essay" rows="4" placeholder="Lorem ipsum..." required></crowd-text-area>
+  </div>
+</crowd-form>
