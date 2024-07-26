@@ -1,19 +1,7 @@
-import os
+from client import get_client
 
-import boto3
-from dotenv import load_dotenv
-
-load_dotenv()
-# MTurkクライアントの作成
-mturk = boto3.client(
-    "mturk",
-    aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
-    region_name="us-east-1",
-    endpoint_url="https://mturk-requester-sandbox.us-east-1.amazonaws.com",
-)
-
-hit_id = "3RZS0FBRXY4BKGCL5ZZ9Y4RVTG7CPL"
+mturk = get_client()
+hit_id = "3ICOHX7EOX9C2T5RIV6NDNYZPMQE0A"
 # 結果を取得するためのコード
 item = {"hit_id": hit_id}
 
@@ -42,4 +30,6 @@ for assignment in assignments:
     print(f"Assignment ID: {assignment_id}")
     print(f"Worker ID: {worker_id}")
     print(f"Answer: {answer_xml}")
-    print("-----")
+    print(f"Submit Time: {assignment['SubmitTime']}")
+    print(f"Approval Status: {assignment['AssignmentStatus']}")
+    print("-" * 40)
