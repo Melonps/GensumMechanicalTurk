@@ -1,4 +1,5 @@
 <!-- For help on using this template, see the blog post: https://blog.mturk.com/editing-the-survey-link-project-template-in-the-ui-7c75285105fb#.py7towsdx --><!-- HIT template: SurveyLink-v3.0 --><!-- The following snippet enables the 'responsive' behavior on smaller screens -->
+
 <meta content="width=device-width,initial-scale=1" name="viewport" />
 <section class="container" id="SurveyLink">
   <!-- Instructions -->
@@ -36,15 +37,109 @@
             your HIT. Consult with your survey service provider on how to
             generate this code at the end of your survey.
           </p>
+          <div class="section">
+            <h2>1. Purpose of the Research</h2>
+            <p>
+              We are researching methods to effectively summarize and convey bar
+              graphs.
+            </p>
+          </div>
+          <div class="section">
+            <h2>2. Method of Cooperation</h2>
+            <p>
+              You will listen to explanations of bar graphs and select the graph
+              that matches the explanation.
+            </p>
+          </div>
+          <div class="section">
+            <h2>3. Compensation</h2>
+            <p>
+              Currently, since this is an archived state, no compensation will
+              be provided.
+            </p>
+          </div>
+          <div class="section">
+            <h2>4. Handling of Personal Information</h2>
+            <p>
+              The survey results will be published in academic papers, etc., but
+              no individual will be identified.
+            </p>
+          </div>
+          <div class="section">
+            <h2>5. Ethical Considerations</h2>
+            <p>
+              We will take the following ethical considerations in cooperation
+              with the research:
+            </p>
+            <ol>
+              <li>
+                Cooperation in this research is voluntary and not compulsory.
+              </li>
+              <li>
+                Even if you refuse to cooperate in this research, you will not
+                suffer any disadvantage and can stop at any time.
+              </li>
+              <li>
+                The data from this research will be stored on computers and
+                servers accessible only to researchers participating in this
+                research and will not be used for any purpose other than this
+                research and related research.
+              </li>
+              <li>
+                The results of this research will be published in academic
+                papers, etc., but no individual will be identified.
+              </li>
+              <li>
+                After the research is completed, all data that could identify
+                individuals will be destroyed.
+              </li>
+            </ol>
+          </div>
+          <div class="section">
+            <h2>6. Contact Information</h2>
+            <p>
+              Osaka Metropolitan University Graduate School of Informatics,
+              Division of Core Informatics, Associate Professor Masaichi Iwamura
+            </p>
+            <ol>
+              <li>
+                <strong>Address:</strong> 1-1 Gakuencho, Nakaku, Sakai City,
+                Osaka, 599-8531, Japan
+              </li>
+              <li><strong>Phone number:</strong> 072-254-9277</li>
+              <li>
+                <strong>Email:</strong>
+                <a href="mailto:masa.i@omu.ac.jp">masa.i@omu.ac.jp</a>
+              </li>
+            </ol>
+            <p>
+              Osaka Prefecture University Faculty of Engineering, Department of
+              Electrical and Electronic Engineering, 4th Year, Mari Kakei
+            </p>
+            <ol>
+              <li>
+                <strong>Email:</strong>
+                <a href="mailto:sdb01029@st.osakafu-u.ac.jp"
+                  >sdb01029@st.osakafu-u.ac.jp</a
+                >
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- End Instructions --><!-- Survey Link Layout -->
 
   <div class="row" id="workContent">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <!-- Content for Worker -->
+      <div class="row" id="consentSection">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+          <label>
+            <input type="checkbox" id="consentCheckbox" /> I agree to
+            participate in this survey
+          </label>
+        </div>
+      </div>
       <table class="table table-condensed table-bordered">
         <colgroup>
           <col class="col-xs-4 col-md-4" />
@@ -58,6 +153,8 @@
                 class="dont-break-out"
                 href="http://[example.com/survey345.html]"
                 target="_blank"
+                id="surveyLink"
+                style="display: none"
                 >http://example.com/survey345.html</a
               >
             </td>
@@ -66,8 +163,6 @@
       </table>
       <!-- End Content for Worker --><!-- Input from Worker -->
       <crowd-form answer-format="flatten-objects">
-        <crowd-instructions link-text="View instructions" link-type="button">
-        </crowd-instructions>
         <div>
           <p>Provide the survey code here:</p>
           <crowd-input
@@ -76,6 +171,8 @@
             required
           ></crowd-input>
         </div>
+        <crowd-instructions link-text="View instructions" link-type="button">
+        </crowd-instructions>
       </crowd-form>
       <!-- End input from Worker -->
     </div>
@@ -113,6 +210,19 @@
     -webkit-hyphens: auto;
     hyphens: auto;
   }
+  .section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: bold;
+  }
 </style>
 <!-- Close internal style sheet --><!-- External JS references -->
 <script
@@ -125,8 +235,12 @@
   integrity="sha384-s1ITto93iSMDxlp/79qhWHi+LsIi9Gx6yL+cOKDuymvihkfol83TYbLbOw+W/wv4"
   crossorigin="anonymous"
 ></script>
+
 <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
-<!-- Open internal javascript -->
+<script
+  src="https://example.com/fontawesome/vVERSION/js/all.js"
+  data-family-prefix="icon"
+></script>
 <script>
   $(document).ready(function () {
     // Instructions expand/collapse
@@ -144,6 +258,13 @@
       }
     });
     // end expand/collapse
+    $("#consentCheckbox").change(function () {
+      if ($(this).is(":checked")) {
+        $("#surveyLink").show();
+      } else {
+        $("#surveyLink").hide();
+      }
+    });
   });
 </script>
 <!-- Close internal javascript -->
